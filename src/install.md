@@ -1,7 +1,7 @@
-# Installation and setup
+# 설치와 설정
 
-There are many ways to install Jujutsu and the best one depends on your system.
-If you don't care at all about how Jujutsu is installed, you can copy-paste these commands:
+Jujutsu를 설치하는 방법은 다양하며, 어떤 방법이 최선인지는 시스템에 따라 다릅니다.
+설치 방식에 전혀 신경 쓰고 싶지 않다면 아래 명령을 그대로 복사해 실행하세요.
 
 ```sh
 curl https://mise.run | sh
@@ -11,155 +11,154 @@ rm -rf /tmp/jj-install
 exec $SHELL --login
 ```
 
-Now run `jj --version` to verify the installation.
-It should print the currently installed version of Jujutsu, something like `jj 0.35.0-blabla`.
-If the output is an error instead, e.g. `bash: jj: command not found...`, open the text box below.
+이제 `jj --version`으로 설치를 확인하세요.
+`jj 0.35.0-blabla` 같은 현재 설치된 버전을 출력해야 합니다.
+대신 `bash: jj: command not found...` 같은 오류가 나온다면 아래 상자를 펼쳐 보세요.
 
 ````admonish fail title="jj: command not found..." collapsible=true
-Your system probably doesn't add the installation directory `~/.local/bin` to the `PATH` environment variable.
-To fix that, you first need to figure out what shell you're using:
+여러분의 시스템은 설치 디렉터리 `~/.local/bin`을 `PATH` 환경 변수에 추가하지 않는 것 같습니다.
+이를 해결하려면 어떤 셸을 쓰는지 먼저 알아야 합니다.
 
 ```sh
 echo $SHELL
 ```
 
-The output should end with either "bash", or "zsh".
-That's your shell.
-Next, put a command adding `~/.local/bin` to your `PATH` variable into your shell's startup script:
+출력은 "bash" 또는 "zsh"로 끝날 겁니다.
+그게 여러분의 셸입니다.
+다음으로 셸 시작 스크립트에 `~/.local/bin`을 `PATH`에 추가하는 명령을 넣습니다.
 
 ```sh
-# for bash:
+# bash:
 echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc
 ```
 
 ```sh
-# for zsh:
+# zsh:
 echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.zshrc
 ```
 
-Lastly, close the terminal and open a new one so the changes take effect.
+마지막으로 터미널을 닫았다가 다시 열어 변경 사항을 적용하세요.
 ````
 
-```admonish note title="Explanation of installation commands" collapsible=true
-Installing software is more difficult than one might think.
-It depends on many factors like CPU architecture and operating system.
-That's why there's not a single, easy command we can run to install Jujutsu on any system.
-Instead, we first install another program that specializes in installing software called `mise`.
-(You can read more about mise on [its website](https://mise.jdx.dev/).)
-The first command `curl https://mise.run | sh` downloads and runs a script from the internet that installs `mise` for you.
-This is kind of dangerous and you should be careful when executing scripts from the internet.
-People could place malicious commands in the script you're downloading.
-But it's a convenient technique if you trust the owner of the website you're loading the script from.
+```admonish note title="설치 명령 설명" collapsible=true
+소프트웨어 설치는 생각보다 어렵습니다.
+CPU 아키텍처, 운영체제 등 여러 요소에 따라 달라지죠.
+그래서 어떤 시스템에서든 한 줄로 Jujutsu를 설치할 수 있는 간단한 명령은 존재하지 않습니다.
+대신, 먼저 소프트웨어 설치를 전문으로 하는 `mise`라는 프로그램을 설치합니다.
+(`mise`에 대한 자세한 내용은 [공식 웹사이트](https://mise.jdx.dev/)에서 볼 수 있습니다.)
+`curl https://mise.run | sh` 명령은 인터넷에서 스크립트를 내려받아 실행하며 `mise`를 설치합니다.
+인터넷에서 받은 스크립트를 실행하는 일은 위험할 수 있습니다.
+누군가 스크립트에 악성 명령을 넣어 둘 수도 있기 때문입니다.
+하지만 스크립트를 내려받는 사이트를 신뢰한다면 편리한 방법입니다.
 
-The second command runs `mise` to download Jujutsu into a temporary directory.
-We have to specify the full path to the `mise` binary (`~/.local/bin/mise`), because at this point we don't know if `~/.local/bin` is included in your `PATH` variable.
-(See the ["Terminal basics" chapter](./terminal_basics.md#the-path-variable) for an explanation of that.)
-`mise` takes care of downloading the right binary for your operating system and CPU architecture.
+두 번째 명령은 `mise`를 실행해 Jujutsu를 임시 디렉터리에 내려받습니다.
+이 시점에는 `~/.local/bin`이 `PATH`에 들어 있는지 확신할 수 없으므로 `mise` 실행 파일의 전체 경로(`~/.local/bin/mise`)를 지정합니다.
+(자세한 내용은 ["터미널 기초" 장](./terminal_basics.md#the-path-variable)을 참고하세요.)
+`mise`가 운영체제와 CPU 아키텍처에 맞는 바이너리를 알아서 가져옵니다.
 
-The following command moves the downloaded binary to `~/.local/bin`, which is the customary place for user-local programs.
-`rm -rf /tmp/jj-install` ("remove recursive force") deletes the temporary download directory and its content.
+이후 명령은 내려받은 바이너리를 사용자용 프로그램이 모여 있는 `~/.local/bin`으로 옮깁니다.
+`rm -rf /tmp/jj-install`(remove recursive force)는 임시 다운로드 디렉터리와 그 안의 내용을 삭제합니다.
 
-Lastly, `exec $SHELL --login` restarts your shell, which causes its startup scripts to run again.
-Some Linux distributions like Ubuntu only add `~/.local/bin` to the `PATH` variable if that directory exists when the terminal is started.
-So, restarting the terminal after installing Jujutsu is a simple way to make sure the system will find the new program.
+마지막으로 `exec $SHELL --login`은 셸을 재시작해 시작 스크립트를 다시 실행하게 합니다.
+Ubuntu 같은 일부 리눅스 배포판은 터미널이 시작될 때 해당 디렉터리가 존재할 경우에만 `~/.local/bin`을 `PATH`에 추가합니다.
+따라서 Jujutsu 설치 후 터미널을 재시작하면 새 프로그램을 찾을 수 있게 만드는 간단한 방법입니다.
 
-Maybe there are distributions which don't add `~/.local/bin` to `PATH` **at all**, which would mean those commands don't work on such a system.
-I'm not aware of such distributions.
-(Please [open an issue](https://github.com/jj-for-everyone/jj-for-everyone.github.io/issues/new) if you know of a relevant one!)
-You can fix such an issue for yourself by extending the `PATH` variable in your [shell startup script](http://localhost:3210/terminal_basics.html#startup-scripts).
+혹시 **아예** `~/.local/bin`을 `PATH`에 추가하지 않는 배포판도 있을 수 있습니다.
+그럴 경우 위 명령이 동작하지 않습니다.
+저는 그런 배포판을 모르지만 (관련 사례를 알고 있다면 [이슈를 열어](https://github.com/jj-for-everyone/jj-for-everyone.github.io/issues/new) 알려 주세요!)
+그럴 땐 [셸 시작 스크립트](./terminal_basics.md#startup-scripts)에서 `PATH` 변수를 직접 확장하면 됩니다.
 ```
 
-````admonish info title="Other installation methods" collapsible=true
-The official installation instructions for several different platforms are [here](https://jj-vcs.github.io/jj/latest/install-and-setup/).
-I will mention a few methods that I consider important as well.
+````admonish info title="기타 설치 방법" collapsible=true
+다양한 플랫폼을 위한 공식 설치 방법은 [여기](https://jj-vcs.github.io/jj/latest/install-and-setup/)에 정리되어 있습니다.
+제가 중요하다고 생각하는 몇 가지 방법도 함께 소개합니다.
 
-If you use [cargo-binstall](https://github.com/cargo-bins/cargo-binstall), this works great:
+[cargo-binstall](https://github.com/cargo-bins/cargo-binstall)을 사용한다면 다음 명령이 잘 동작합니다.
 
 ```sh
 cargo-binstall jj-cli
 ```
 
-If you're a Mac & Homebrew user, this one's for you:
+Mac과 Homebrew 사용자라면 다음 명령을 쓰세요.
 
 ```sh
 brew install jj
 ```
 
-If you have the Rust toolchain installed and would like to compile from source, you can run:
+Rust 툴체인이 설치되어 있고 소스에서 직접 컴파일하고 싶다면 아래를 실행하세요.
 
 ```sh
 cargo install --locked --bin jj jj-cli
 ```
 
-You can also download a binary directly from Jujutsu's [release page](https://github.com/jj-vcs/jj/releases/latest).
-Scroll down to "Assets", there is a list of archives to download.
-The right one depends on two things: your operating system and your CPU architecture.
-Look for the strings matching your system in the names of the archives.
+Jujutsu의 [릴리스 페이지](https://github.com/jj-vcs/jj/releases/latest)에서 바이너리를 직접 내려받을 수도 있습니다.
+"Assets"까지 스크롤하면 다운로드 가능한 아카이브 목록이 있습니다.
+운영체제와 CPU 아키텍처 두 가지 요소에 따라 올바른 파일이 달라집니다.
+파일 이름에서 자신의 시스템과 일치하는 문자열을 찾으세요.
 
-How to identify your operating system:
+운영체제 식별 방법:
 
-| operating system | string to look for |
+| 운영체제 | 찾을 문자열 |
 | --- | --- |
 | Linux | unknown-linux-musl |
 | Mac | apple-darwin |
 | Windows | pc-windows-msvc |
 
-How to identify your CPU architecture:
+CPU 아키텍처 식별 방법:
 
-| CPU brand | string to look for |
+| CPU 제조사 | 찾을 문자열 |
 | --- | --- |
 | Intel | x86_64 |
 | AMD | x86_64 |
 | Apple | aarch64 |
 | ARM | aarch64 |
-| Qualcom (Snapdragon) | aarch64 |
+| Qualcomm(Snapdragon) | aarch64 |
 
-Once you have downloaded the right archive, you need to extract it.
-You should be able to right-click on the downloaded archive in your file explorer and select "extract" or something similar in the drop-down.
-The extracted folder will contain documentation and a file called "jj".
-You need to move that into the directory `~/.local/bin/`.
-(Or another location where you keep your programs if you know what you're doing.)
+올바른 아카이브를 내려받았으면 압축을 풀어야 합니다.
+파일 탐색기에서 아카이브를 우클릭해 "Extract" 같은 메뉴를 선택하면 됩니다.
+압축을 풀면 문서와 "jj"라는 파일이 들어 있습니다.
+이를 `~/.local/bin/` 디렉터리로 옮기세요.
+(프로그램을 따로 모아 두는 위치가 있다면 그곳을 사용해도 됩니다.)
 ````
 
-## Initial configuration
+## 초기 설정
 
-Jujutsu is very configurable, but we don't care about most knobs and dials right now.
-The only thing that you **must** configure is your name and email.
-This is required metadata and some things won't work right without this information.
-However, you don't have to enter your _real_ name and email, in case you're not comfortable storing that information in the repositories you're planning to work on.
+Jujutsu는 설정 옵션이 매우 많지만 지금은 대부분을 신경 쓰지 않아도 됩니다.
+**반드시** 설정해야 하는 것은 이름과 이메일뿐입니다.
+필수 메타데이터이며, 이 정보가 없으면 일부 기능이 제대로 동작하지 않습니다.
+물론 저장소에 실제 이름과 이메일을 남기고 싶지 않다면 가명을 써도 됩니다.
 
-If you're working on school or work projects, it's probably fine to configure your real name and school / work email.
-These repositories are usually not publicly accessible.
+학교나 회사 프로젝트를 진행한다면 실명과 학교/회사 이메일을 써도 문제 없습니다.
+이런 저장소는 보통 외부에 공개되지 않습니다.
 
-If you're planning to work on open source projects that anyone can see, you may want to be more careful.
-You could use your GitHub handle as username, but many are comfortable using their real name too.
-The email address is more important.
-If you use your normal, private email address, there is a risk of receiving undesirable emails at that address.
-You might consider using a dedicated address just for open source work.
-Another alternative is to use an address provided by GitHub.
-It identifies your GitHub account, but you cannot receive emails through it.
-Go to [GitHub's email settings](https://github.com/settings/emails) and select "Keep my email address private", your private email address will then be shown at the top.
+누구나 볼 수 있는 오픈 소스 프로젝트를 다룬다면 더 신중해야 할 수도 있습니다.
+이름은 GitHub 핸들을 사용해도 되고, 실명을 쓰는 사람도 많습니다.
+이메일은 더 민감합니다.
+개인 이메일을 사용하면 스팸을 받을 위험이 있습니다.
+오픈 소스 전용 이메일을 만드는 방법도 있고, GitHub이 제공하는 주소를 쓰는 방법도 있습니다.
+이 주소는 GitHub 계정을 식별하지만 메일을 받을 수는 없습니다.
+[GitHub 이메일 설정](https://github.com/settings/emails)에서 "Keep my email address private"를 선택하면 개인용 주소가 상단에 표시됩니다.
 
-Here are the commands to configure your username and email:
+사용자 이름과 이메일을 설정하는 명령은 다음과 같습니다.
 
 ```sh
 jj config set --user user.name "Anonymous"
 jj config set --user user.email "anon@local"
 ```
 
-If you want shell completions, follow the instructions [here](https://jj-vcs.github.io/jj/latest/install-and-setup/#command-line-completion).
-If you don't know what a "shell completion" is, don't worry, it's not important.
+셸 자동 완성을 원한다면 [이 문서](https://jj-vcs.github.io/jj/latest/install-and-setup/#command-line-completion)를 참고하세요.
+"셸 자동 완성"이 무엇인지 모른다면 걱정하지 마세요. 지금은 중요하지 않습니다.
 
-## Installing a simple text editor
+## 간단한 텍스트 편집기 설치
 
-Jujutsu will sometimes ask you to edit a text file.
-The default text editor used for that purpose is `nano` on Linux and Mac.
-It works fine, but it can be counter-intuitive for new users.
-(<kbd>Ctrl+O</kbd> is saving the file and <kbd>Ctrl+X</kbd> is closing the program.)
+Jujutsu는 가끔 텍스트 파일 수정을 요구합니다.
+기본 텍스트 편집기는 Linux와 Mac에서 `nano`입니다.
+잘 동작하지만 처음 접하는 사람에게 직관적이지 않을 수 있습니다.
+(<kbd>Ctrl+O</kbd>가 저장, <kbd>Ctrl+X</kbd>가 종료입니다.)
 
-This is optional, but I recommend you install a text editor called [edit](https://github.com/microsoft/edit).
-I consider it to be the simplest and most intuitive alternative.
-If you installed Jujutsu with `mise` (as suggested above) you can also install `edit` the same way:
+선택 사항이지만 [edit](https://github.com/microsoft/edit)라는 텍스트 편집기를 설치하길 권장합니다.
+제가 보기엔 가장 단순하고 직관적인 대안입니다.
+위에서 추천한 대로 `mise`로 Jujutsu를 설치했다면 같은 방법으로 `edit`도 설치할 수 있습니다.
 
 ```sh
 mise install-into edit@latest /tmp/edit-install
@@ -167,16 +166,16 @@ mv /tmp/edit-install/edit ~/.local/bin
 rm -rf /tmp/edit-install
 ```
 
-If you installed Jujutsu using another method, you'll want to install `edit` on your own as well.
+다른 방법으로 Jujutsu를 설치했다면 `edit`도 알아서 설치하세요.
 
-Next, we need to configure Jujutsu to use `edit` when opening a text file:
+다음으로 Jujutsu가 텍스트 파일을 열 때 `edit`를 사용하도록 설정해야 합니다.
 
 ```sh
 jj config set --user ui.editor edit
 ```
 
-From now on, when Jujutsu opens a text file for you, it will do so using `edit`.
-When you're done editing a file, click on "File", then "Exit", in the menu bar or press <kbd>Ctrl+Q</kbd> to exit the text editor.
-It will ask you if you want to save the file, which you confirm by pressing <kbd>Enter</kbd>.
-That's it!
-I will remind you how it works the first time we need it.
+앞으로 Jujutsu가 텍스트 파일을 열면 `edit`로 실행합니다.
+편집을 마치면 메뉴 바에서 "File" → "Exit"를 클릭하거나 <kbd>Ctrl+Q</kbd>로 편집기를 종료하세요.
+파일을 저장할지 묻는 창이 뜨면 <kbd>Enter</kbd>로 확인하면 됩니다.
+끝입니다!
+이 편집기를 처음 사용할 때 다시 한 번 상기해 드리겠습니다.

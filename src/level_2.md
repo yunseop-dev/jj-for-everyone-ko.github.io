@@ -1,20 +1,20 @@
-# Level 2
+# 레벨 2
 
-This level will provide you with the minimum skills to start collaborating with others.
-If you're a student working on a group project or a professional software engineer, you absolutely need to know this.
+이 레벨에서는 다른 사람과 협업을 시작하기 위한 최소한의 기술을 다룹니다.
+팀 프로젝트를 진행하는 학생이든, 프로 소프트웨어 엔지니어든 반드시 알아야 합니다.
 
-Here's the cheat sheet for level 2. You may also want to revise the [level 1 cheat sheet](./level_1.md).
+아래는 레벨 2 치트 시트입니다. [레벨 1 치트 시트](./level_1.md)도 함께 복습하면 좋습니다.
 
-````admonish info title="cheat sheet"
-Fetch new commits from your peers
+````admonish info title="치트 시트"
+동료들의 새 커밋을 가져옵니다
 ```sh
 jj git fetch
 ```
-Merge your branched-off changes with the main bookmark
+분기해 두었던 변경을 main 북마크와 병합합니다
 ```sh
 jj new main @-
 ```
-Push your latest commit to a new bookmark
+최신 커밋을 새 북마크로 푸시합니다
 ```sh
 jj git push --change @-
 ```

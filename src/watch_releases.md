@@ -1,25 +1,25 @@
-# Stay up to date
+# 최신 정보 따라가기
 
-Both this tutorial and Jujutsu are still evolving.
-In order to keep your Jujutsu knowledge up-to-date, **subscribe to releases of the tutorial's GitHub repo**.
-You'll get an email from GitHub whenever I post a release, which basically allows me to send you notifications.
+이 튜토리얼도, Jujutsu도 여전히 발전 중입니다.
+Jujutsu 지식을 최신 상태로 유지하려면 **튜토리얼 GitHub 저장소의 릴리스를 구독** 하세요.
+제가 릴리스를 게시할 때마다 GitHub에서 이메일을 보내 주므로, 사실상 알림을 받아볼 수 있습니다.
 
-I'm planning to post releases for two reasons in particular:
+특히 두 가지 이유로 릴리스를 올릴 예정입니다.
 
-1. I finished writing a new level.
-1. A new version of Jujutsu includes changes that are relevant to readers of this tutorial.
+1. 새 레벨을 모두 작성했을 때
+1. Jujutsu 새 버전에 이 튜토리얼 독자에게 중요한 변화가 포함됐을 때
 
-To subscribe: Visit the [GitHub repo](https://github.com/jj-for-everyone/jj-for-everyone.github.io), click on "Watch", then "Custom" and lastly select "Releases".
+구독 방법: [GitHub 저장소](https://github.com/jj-for-everyone/jj-for-everyone.github.io)에 접속해 "Watch" → "Custom" → "Releases" 순으로 선택하세요.
 
-![screenshot of how to subscribe to release announcements](./watch_releases.png)
+![릴리스 알림 구독 방법 스크린샷](./watch_releases.png)
 
-The following levels are planned for the future:
+앞으로 계획된 레벨은 다음과 같습니다.
 
-| Level | Description |
+| 레벨 | 설명 |
 | :-: | --- |
-| **4** | History rewriting skills. These will allow you to iterate toward a polished version history, which pays dividends long-term. Some projects require you to have these skills in order to meet their quality standards. |
-| **5** | Productivity boosters, advanced workflows, lesser-known CLI functions and a little VCS theory. Completing this level means you have mastered Jujutsu. |
-| **6** | Additional topics that only come up in specific situations: tags, submodules, workspaces etc. Consider skimming the list of topics and come back once you have an actual need for it. |
+| **4** | 역사 재작성 스킬. 다듬어진 히스토리를 만드는 반복 작업을 돕고, 장기적으로 큰 가치를 줍니다. 일부 프로젝트는 품질 기준을 충족하려면 반드시 이 기술을 요구합니다. |
+| **5** | 생산성 향상, 고급 워크플로, 잘 알려지지 않은 CLI 기능, 약간의 VCS 이론. 이 레벨을 마치면 Jujutsu를 마스터한 것입니다. |
+| **6** | 특정 상황에서만 필요한 추가 주제: 태그, 서브모듈, 워크스페이스 등. 목록을 훑어 보고 필요할 때 다시 찾아오세요. |
 
-I consider the tutorial up-to-date with Jujutsu **version 0.35**, which was released in **November 2025**.
-If that's more than a couple months in the past, I probably stopped updating this tutorial.
+이 튜토리얼은 **2025년 11월**에 출시된 **Jujutsu 0.35** 버전을 기준으로 최신 상태입니다.
+그보다 몇 달 이상 지난 시점이라면 제가 업데이트를 멈춘 것일 수도 있습니다.

@@ -1,29 +1,29 @@
-# Level 3
+# 레벨 3
 
-This level will provide you with basic problem solving skills like conflict resolution and restoring files from history.
-Without this knowledge, it's only a matter of time until you run into trouble.
+이 레벨에서는 충돌 해결, 히스토리에서 파일 복원 같은 기본 문제 해결 능력을 익힙니다.
+이 지식이 없다면 언젠가는 반드시 난관에 부딪히게 됩니다.
 
-Here's the cheat sheet for level 3. You may also want to revise the [level 2 cheat sheet](./level_2.md).
+다음은 레벨 3 치트 시트입니다. [레벨 2 치트 시트](./level_2.md)도 함께 복습해 보세요.
 
-````admonish info title="cheat sheet"
-Undo and redo the last operation on the repository
+````admonish info title="치트 시트"
+저장소에서 가장 최근 작업을 되돌리고 다시 적용합니다
 ```sh
 jj undo
 jj redo
 ```
-Track a remote bookmark in order to push to it
+원격 북마크를 추적하여 그곳으로 푸시할 수 있게 합니다
 ```sh
 jj bookmark track <NAME>@origin
 ```
-Delete a commit (and bookmarks pointing to it)
+커밋(및 해당 커밋을 가리키는 북마크)을 삭제합니다
 ```sh
 jj abandon <CHANGE_ID>
 ```
-Restore the state (of a specific file) (from a specific commit)
+특정 커밋(의 특정 파일) 상태를 복원합니다
 ```sh
 jj restore [--from <CHANGE_ID>] [FILE_TO_RESTORE]
 ```
-Split a messy working copy
+지저분한 워킹 카피를 나눕니다
 ```sh
 jj commit --interactive
 ```

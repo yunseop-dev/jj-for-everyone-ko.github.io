@@ -1,7 +1,7 @@
-# Creating a new commit
+# 새 커밋 만들기
 
-````admonish reset title="Reset your progress" collapsible=true
-To reset your progress to the start of this chapter, run the following command:
+````admonish reset title="진행 상황 초기화" collapsible=true
+이 장의 시작으로 되돌리려면 다음 명령을 실행하세요.
 
 ```sh
 curl https://jj-for-everyone.github.io/reset.sh | bash -s commit
@@ -9,45 +9,44 @@ cd ~/jj-tutorial/repo
 ```
 ````
 
-Once we are done with a set of changes, we should create a new commit.
-If we don't do that, the next changes we make will be recorded into the same commit as the previous ones.
-That would make it harder to understand the evolution of a project later.
+일련의 변경 작업을 마쳤다면 새 커밋을 만들어야 합니다.
+그렇지 않으면 다음에 하는 변경이 이전 변경과 같은 커밋에 기록됩니다.
+그렇게 되면 나중에 프로젝트의 변천사를 이해하기가 훨씬 어려워집니다.
 
-Before we create a new commit, we also need to give a description to the one we've been working on so far.
-Every commit needs to have a description, even if it's a short one.
+새 커밋을 만들기 전에 지금까지 작업하던 커밋에 설명을 달아야 합니다.
+모든 커밋에는 짧더라도 설명이 필요합니다.
 
-So, there are conceptually two things we need to do now:
-1. Give a description to the changes we just finished making, the ones that were recorded in the existing working-copy (`@`) commit.
-1. Start working on a completely new commit, which is the child of the one we just finished.
+즉, 지금 해야 할 일은 개념적으로 두 가지입니다.
+1. 기존 워킹 카피(`@`) 커밋에 기록된 방금 만든 변경에 설명을 붙인다.
+1. 방금 완료한 커밋의 자식이 되는 완전히 새로운 커밋을 만들어 그곳에서 작업을 이어 간다.
 
-```admonish title="A source of confusion if you know Git" collapsible=true
-This tutorial assumes that you have no experience with Git.
-However, if you _have_ used Git before, it might actually be more difficult for you to understand this.
-The reason is that both Git and Jujutsu have a subcommand called `commit`, but they work differently.
+```admonish title="Git을 알고 있다면 혼란스러울 수 있는 지점" collapsible=true
+이 튜토리얼은 Git 경험이 없다고 가정합니다.
+하지만 이미 Git을 써 본 사람이라면 오히려 더 헷갈릴 수 있습니다.
+Git과 Jujutsu 모두 `commit`이라는 서브커맨드를 갖고 있지만 동작 방식이 다르기 때문입니다.
 
-In Git, changes you make are not recorded automatically into commits.
-Instead, they exist outside of any commit, until you add them to one manually.
-The command `git commit` creates a commit containing the new changes as well as the new commit message.
+Git에서는 만든 변경이 자동으로 커밋에 기록되지 않습니다.
+직접 커밋에 추가하기 전까지는 어떤 커밋에도 속하지 않죠.
+`git commit`은 새 변경과 커밋 메시지를 포함한 커밋을 생성하는 명령입니다.
 
-In Jujutsu, there is always a commit already and any changes you make are automatically recorded into it.
-So, the description you type during `jj commit` will be applied to a commit that has already existed for some time.
-The _new_ commit that's being created is completely empty and has no description.
-It's ready for auto-recording of the upcoming changes you will be making.
+Jujutsu에서는 항상 이미 존재하는 커밋이 있고, 모든 변경이 자동으로 그 커밋에 기록됩니다.
+따라서 `jj commit`에서 입력하는 설명은 꽤 전에 만들어져 있던 커밋에 적용됩니다.
+새로 만들어지는 커밋은 완전히 빈 상태이며 설명도 없습니다.
+앞으로 만들 변경이 자동으로 기록될 준비가 된 셈입니다.
 ```
 
-The command to complete both of these tasks at once is:
+이 두 작업을 한 번에 끝내는 명령은 다음과 같습니다.
 
 ```sh
 jj commit
 ```
 
-This will open a text editor so you can write a description for the commit.
-If you followed my instructions during [installation and setup](install.md#installing-a-simple-text-editor), the text editor will be `edit`.
-When you're done writing the description, click on "File", then "Exit", in the menu bar or press <kbd>Ctrl+Q</kbd> to exit the text editor.
-Confirm that you want to save the file by pressing <kbd>Enter</kbd>.
+그러면 텍스트 편집기가 열리며 커밋 설명을 작성할 수 있습니다.
+[설치와 설정](install.md#installing-a-simple-text-editor) 장의 안내를 따랐다면 편집기는 `edit`입니다.
+설명을 다 썼다면 메뉴 바에서 "File" → "Exit"를 클릭하거나 <kbd>Ctrl+Q</kbd>로 편집기를 종료하세요.
+저장할 것인지 묻는 창에서는 <kbd>Enter</kbd>로 확인합니다.
 
-You may notice that the text file doesn't start empty.
-It already contains a few lines:
+파일이 비어 있지 않고 몇 줄이 이미 적혀 있다는 것을 볼 수 있습니다.
 
 ```
 JJ: This commit contains the following changes:
@@ -56,12 +55,11 @@ JJ:
 JJ: Lines starting with "JJ:" (like this one) will be removed.
 ```
 
-These lines starting with `JJ:` are _comments_, similar to lines starting with a pound `#` in the terminal.
-They will not be part of the final commit description, so you don't need to delete them.
-Jujutsu uses these comments to remind you which files you modified when working on this commit.
-That can be helpful inspiration for a good commit description.
+`JJ:`로 시작하는 줄은 터미널에서 `#`로 시작하는 줄과 비슷한 _주석_ 입니다.
+최종 커밋 설명에 포함되지 않으니 굳이 지우지 않아도 됩니다.
+이 주석은 해당 커밋에서 어떤 파일을 수정했는지 상기시켜 좋은 설명을 떠올리는 데 도움을 줍니다.
 
-Here's an example description you could type (or copy-paste) into the text editor:
+편집기에 입력(또는 복사·붙여넣기)할 수 있는 예시 설명은 다음과 같습니다.
 
 ```
 Add readme with project title
@@ -73,69 +71,65 @@ where the title of the document is written on the first line with a
 prefixed `#` symbol.
 ```
 
+여기에는 지켜야 할 간단한 구조가 있습니다.
+설명의 첫 줄을 **제목(subject)** 이라고 합니다.
+제목만으로 충분할 때도 있지만, 변경을 자세히 설명하려면 **본문(body)** 을 이어서 작성하세요.
+제목과 본문은 **빈 줄 하나** 로 구분합니다.
+두 부분 모두 **한 줄이 72자를 넘지 않도록** 작성하세요.
 
-There is a little bit of structure here that you should follow.
-The first line of the description is called the **subject**.
-Sometimes the subject line is all you need, but to describe your changes in more detail, you can follow it up with a **body**.
-Subject and body are **separated by an empty line**.
-Both of them should **not exceed 72 characters** per line.
+커밋 메시지는 나중에 자신과 다른 사람이 변경 내용과 그 이유를 이해하는 데 큰 도움이 됩니다.
+그 중요도는 프로젝트의 성격에 따라 달라집니다.
+참여자가 많고 수명이 긴 프로젝트일수록 좋은 커밋 메시지가 더욱 중요해집니다.
+예를 들어 리눅스 커널은 수십 년 동안 수천 명이 함께 개발한 프로젝트라 커밋 메시지 작성에 많은 고민과 노력을 기울입니다.
+반대로 한 강의의 과제를 보관하는 학생의 저장소는 몇 달 안에 끝나며, 작성자 본인도 역사를 다시 들여다볼 일이 거의 없습니다.
+그런 경우라면 커밋 메시지에 많은 시간을 들이지 않을 수도 있습니다.
 
-Commit messages are important, because they make it easier for you and others to understand the changes and their motivation later on.
-This importance lies on a spectrum:
-The more people work on a project and the longer-lived it is, the more important good commit messages become.
-For example, the Linux kernel is a multi-decade project with thousands of people working on it together.
-Linux developers put a lot of thought and effort into good commit messages.
-On the other extreme of the spectrum may be a student's repository for storing the homework of a single lecture.
-The project is over within a couple of months and there is little chance of the student ever digging into the history, let alone anyone else.
-That student probably won't invest much time into good commit messages.
+```admonish info title="좋은 커밋 메시지를 위한 추가 팁" collapsible=true
+어떤 종류의 프로젝트든 도움이 되는 관례를 정리했습니다.
 
-```admonish info title="More tips for good commit messages" collapsible=true
-Here are some additional conventions that are good practice for any type of project.
+**제목은 가능하면 50자 이하로**  
+72자가 절대적인 상한이지만, 제목은 간결할수록 좋습니다.
+공간이 제한된 곳에 표시되며, 사람들은 짧은 문장으로 어떤 변경인지 파악하길 원합니다.
+제목이 자주 50자를 넘는다면 서로 관계없는 변경을 하나의 커밋에 묶고 있는지 점검해 보세요.
+관련 없는 변경을 각각의 커밋으로 나누면 간결한 제목을 만들기가 더 쉽습니다.
+물론 필요한 경우 50자를 넘어도 괜찮습니다.
 
-**Try to keep the subject line below 50 characters**\
-While 72 characters is the hard limit, the subject line usually benefits from being as concise as possible.
-It is shown in many places where space is scarce and people want to get a general idea of your changes without reading too much.
-If you find yourself exceeding 50 characters regularly, you may be combining multiple unrelated changes into a single commit.
-If you put unrelated changes into separate commits, finding concise subject lines becomes easier.
-However, there are often situations where 50 characters is just too restrictive, so don't worry about going above when necessary.
+**제목은 명령형(imperative mood)으로**  
+커밋 메시지를 작성할 때 흔히 과거형(예: "Fixed bugs...")으로 쓰거나, 변경 내용을 명사형으로 나열(예: "bug fixes...")하기 쉽습니다.
+대신 **지시문** 처럼 작성하세요. 예: "Fix bugs and improve code".
+간단한 기준은 제목이 "If applied, this commit will..."을 자연스럽게 완성해야 한다는 것입니다.
+이렇게 하면 히스토리를 읽기가 더 자연스럽습니다.
+이는 주로 제목에 해당하며, 본문 스타일은 좀 더 자유롭습니다.
 
-**Use imperative mood in the subject line**\
-A common instinct when writing commit messages it to describe what you did in the **past tense**, e.g. "Fixed bugs and improved code".
-Another one is to describe the **content** of the commit, e.g. "bug fixes and code improvements".
-Instead, write the subject line as if **giving a command or instruction**, e.g. "Fix bugs and improve code".
-A simple rule of thumb is that the subject should complete the sentence "If applied, this commit will...".
-The resulting history will be more natural to read.
-Note that this primarily applies to the subject, the style of the body can be more flexible.
-
-**Put yourself in the shoes of the reader**\
-The target audience for your commit messages are future readers of the project history.
-They are trying to understand **what** your changes did and **why**.
-They can always read the content changes directly for **how** they did that, so the ideal commit message should complement that.
-Great candidates include information that's not present in the content itself as well as guidance to understand the changes more quickly.
+**독자의 입장에서 생각하기**  
+커밋 메시지의 독자는 프로젝트 히스토리를 나중에 읽는 사람입니다.
+그들은 변경이 **무엇** 을 했고 **왜** 그렇게 했는지 알고 싶어 합니다.
+**어떻게** 했는지는 코드나 파일 변경에서 직접 확인할 수 있으므로, 커밋 메시지는 그것을 보완하는 역할을 하면 좋습니다.
+코드에는 드러나지 않는 맥락이나 변경을 빠르게 이해하도록 돕는 안내를 포함하면 훌륭합니다.
 ```
 
-Let's see the result of running `jj commit` with `jj log`:
+`jj commit` 실행 결과를 `jj log`로 확인해 봅시다.
 
 <!-- generated by aha script -->
 <pre class="aha">
-<span class="bold "></span><span class="bold green ">@</span>  <span class="bold "></span><span class="bold highlighted purple ">p</span><span class="bold highlighted dimgray ">wpuwyto</span><span class="bold "> </span><span class="bold yellow ">alice@local</span><span class="bold "> </span><span class="bold highlighted cyan ">2025-07-22 20:22:36</span><span class="bold "> </span><span class="bold highlighted blue ">3</span><span class="bold highlighted dimgray ">5de496a</span><span class="bold "></span>
-│  <span class="bold "></span><span class="bold highlighted green ">(empty)</span><span class="bold "> </span><span class="bold highlighted green ">(no description set)</span><span class="bold "></span>
-○  <span class="bold "></span><span class="bold purple ">m</span><span class="highlighted dimgray ">kmqlnox</span> <span class="yellow ">alice@local</span> <span class="cyan ">2025-07-22 20:20:34</span> <span class="green ">git_head()</span> <span class="bold "></span><span class="bold blue ">5</span><span class="highlighted dimgray ">b79353a</span>
+<span class="bold "></span><span class="bold green">@</span>  <span class="bold "></span><span class="bold highlighted purple">p</span><span class="bold highlighted dimgray">wpuwyto</span><span class="bold "></span><span class="bold yellow">alice@local</span><span class="bold "></span><span class="bold highlighted cyan">2025-07-22 20:22:36</span><span class="bold "></span><span class="bold highlighted blue">3</span><span class="bold highlighted dimgray">5de496a</span><span class="bold "></span>
+│  <span class="bold "></span><span class="bold highlighted green">(empty)</span><span class="bold "></span><span class="bold highlighted green">(no description set)</span><span class="bold "></span>
+○  <span class="bold "></span><span class="bold purple">m</span><span class="highlighted dimgray">kmqlnox</span> <span class="yellow">alice@local</span> <span class="cyan">2025-07-22 20:20:34</span> <span class="green">git_head()</span> <span class="bold "></span><span class="bold blue">5</span><span class="highlighted dimgray">b79353a</span>
 │  Add readme with project title
-<span class="bold "></span><span class="bold highlighted cyan ">◆</span>  <span class="bold "></span><span class="bold purple ">z</span><span class="highlighted dimgray ">zzzzzzz</span> <span class="green ">root()</span> <span class="bold "></span><span class="bold blue ">0</span><span class="highlighted dimgray ">0000000</span>
+<span class="bold "></span><span class="bold highlighted cyan">◆</span>  <span class="bold "></span><span class="bold purple">z</span><span class="highlighted dimgray">zzzzzzz</span> <span class="green">root()</span> <span class="bold "></span><span class="bold blue">0</span><span class="highlighted dimgray">0000000</span>
 </pre>
 
-There are a few things to observe here:
-- The new commit is a child of our previous working copy commit.
-- The previous commit shows the subject line of the description we gave it.
-- The new commit became our working copy, meaning any further file changes will be recorded into the new commit.
-- The previous commit is marked with `git_head()`.
-  This marker is not important and you can ignore it.
-- The previous commit has a different symbol (circle `○`) than the root commit (diamond `◆`).
-  This is related to an important feature, which we'll learn about later.
+여기서 주목할 점은 다음과 같습니다.
+- 새 커밋은 이전 워킹 카피 커밋의 자식입니다.
+- 이전 커밋에 방금 작성한 설명의 제목이 표시됩니다.
+- 새 커밋이 워킹 카피가 되었으므로, 이후 파일 변경은 새 커밋에 기록됩니다.
+- 이전 커밋에는 `git_head()`라는 표시가 있습니다.
+  중요한 표시는 아니니 무시해도 됩니다.
+- 이전 커밋은 root 커밋(마름모 `◆`)과 다른 기호(동그라미 `○`)입니다.
+  이는 나중에 배울 중요한 기능과 관련이 있습니다.
 
-We now have the tools for the most basic version control workflow:
-1. make some changes
-1. create a new commit
+이제 가장 기본적인 버전 관리 워크플로를 위한 도구를 갖췄습니다.
+1. 변경을 만든다.
+1. 새 커밋을 만든다.
 
-Repeating these two steps is what you'll do the most, when working on a version-controlled project.
+버전 관리 프로젝트에서 가장 자주 반복하는 과정이 바로 이 두 단계입니다.

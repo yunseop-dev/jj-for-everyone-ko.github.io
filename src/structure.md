@@ -1,58 +1,57 @@
-# How to read this tutorial
+# 이 튜토리얼을 읽는 방법
 
-Here's some information about how the tutorial is structured.
-Read carefully for the best experience.
+튜토리얼이 어떻게 구성되어 있는지 설명합니다.
+최고의 학습 경험을 위해 꼼꼼히 읽어 주세요.
 
-## Level up!
+## 레벨업!
 
-The tutorial is split into **levels**, which define the hierarchy in the sidebar.
-When you complete a level, you should probably put this tutorial away for a while and practice what you've learned.
-Once you're comfortable with those skills, come back for the next level.
+튜토리얼은 사이드바 계층을 이루는 **레벨** 단위로 나뉩니다.
+한 레벨을 끝냈다면 잠시 튜토리얼을 덮어 두고, 방금 배운 내용을 직접 연습해 보세요.
+그 기술이 편해졌을 때 다음 레벨로 돌아오면 됩니다.
 
-There is one exception to this:
-If you're here because you need to collaborate with other people, you should complete the levels 1 and 2 right away.
+예외가 하나 있습니다.
+여럿이 협업해야 해서 이곳에 온 거라면 1·2레벨을 바로 이어서 마치세요.
 
-Here's an overview of the available levels:
+현재 제공 중인 레벨은 다음과 같습니다.
 
-| Level | Description |
+| 레벨 | 설명 |
 | :-: | --- |
-| **1** | The bare minimum to get started. Enough for solo-projects like submitting homework as a student. |
-| **2** | The bare minimum for collaboration, e.g. students doing a group project or software engineers working in a team. |
-| **3** | Important problem-solving skills: undoing mistakes, resolving merge conflicts, restoring files from history. |
+| **1** | 시작을 위한 최소한의 지식. 학생 과제 제출 같은 1인 프로젝트에 충분합니다. |
+| **2** | 협업을 위한 최소한의 지식. 팀 프로젝트를 하는 학생이나 소프트웨어 엔지니어에게 필요합니다. |
+| **3** | 실전 문제 해결 능력: 실수 되돌리기, 머지 충돌 해결, 과거 상태에서 파일 복원하기. |
 
-More levels are planned.
-The following chapter explains how to get notified about new content.
+추가 레벨도 계획되어 있습니다.
+다음 장에서 새 콘텐츠 알림을 받는 방법을 설명합니다.
 
-## Reset your progress at any time
+## 언제든 진행 상황 초기화하기 {#reset-your-progress}
 
-Throughout the tutorial, you will build an example repository.
-Later chapters depend on the state of previous ones.
-But don't be afraid to mess up or lose your progress by experimenting!
+튜토리얼 전반에 걸쳐 예제 저장소를 만들게 됩니다.
+후속 장은 앞선 장의 상태에 의존하지만, 실험하다가 망가질까 걱정하지 마세요!
 
-There is a script which automates the task of resetting your progress to the **start of any chapter**.
+**어떤 장의 시작** 으로든 진행 상황을 되돌려 주는 스크립트가 있습니다.
 
-To identify the chapter you want to continue with, the script expects a keyword as an argument.
-Each chapter includes its precise reset command at the top, so you can easily copy-paste it.
-For example, the text box below contains instructions to reset your progress to the very beginning of the tutorial:
+스크립트는 이어서 학습할 장을 가리키는 키워드를 인자로 받습니다.
+각 장 상단에 정확한 초기화 명령이 포함되어 있으니 그대로 복사해 붙여 넣으면 됩니다.
+예를 들어 아래 상자는 튜토리얼 맨 처음으로 돌아가는 방법을 안내합니다.
 
-````admonish reset title="Reset your progress"
-To reset your progress to the start of this chapter, run the following command:
+````admonish reset title="진행 상황 초기화"
+이 장의 시작으로 되돌리려면 다음 명령을 실행하세요.
 
 ```sh
 curl https://jj-for-everyone.github.io/reset.sh | bash -s install
 ```
 ````
 
-This method downloads the script from the internet and executes it right away.
-If you have security concerns about that, you can instead:
-1. Download the script [here](./reset.sh).
-1. Read the source to make sure it's safe.
-   It's not doing anything complicated, it just executes the commands of the tutorial in sequence.
-1. Run the downloaded script (with the chapter-keyword as the first argument).
+이 방식은 스크립트를 인터넷에서 내려받아 바로 실행합니다.
+보안이 걱정된다면 다음 순서를 따르세요.
+1. [여기](./reset.sh)에서 스크립트를 다운로드합니다.
+1. 안전한지 확인하기 위해 소스를 읽습니다.
+   복잡한 일을 하지 않고, 튜토리얼의 명령을 순서대로 실행할 뿐입니다.
+1. 다운로드한 스크립트를 실행합니다(첫 번째 인자로 장 키워드를 전달).
 
-For convenience, the source of the script is also included in the expandable text box below.
+편의를 위해 스크립트 소스도 아래 접을 수 있는 상자에 포함했습니다.
 
-`````admonish note title="Source of reset script" collapsible=true
+`````admonish note title="reset 스크립트 원본" collapsible=true
 ````sh
 {{ #include reset.sh }}
 ````

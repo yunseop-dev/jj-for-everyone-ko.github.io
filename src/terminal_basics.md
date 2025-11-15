@@ -1,99 +1,99 @@
-# Terminal basics
+# 터미널 기초
 
-This chapter is not about Jujutsu or even version control.
-But the tutorial requires you to work in the terminal, so let's cover the basics.
-If you're already comfortable in the terminal, you can confidently skip this chapter.
+이 장은 Jujutsu나 버전 관리 자체에 대한 내용이 아닙니다.
+하지만 튜토리얼을 따라가려면 터미널에서 작업해야 하므로 기본기를 짚고 넘어가겠습니다.
+이미 터미널 사용이 익숙하다면 이 장은 건너뛰어도 됩니다.
 
-There are a lot of small things to cover, so here's a little table of contents:
+살펴볼 자잘한 항목이 많으니, 작은 목차부터 소개합니다.
 
 <!--toc:start-->
-- [What is the terminal?](#what-is-the-terminal)
-- [The prompt](#the-prompt)
-- [Entering commands](#entering-commands)
-- [The current working directory](#the-current-working-directory)
-- [Copy-pasting commands](#copy-pasting-commands)
-- [Redirection](#redirection)
-- [Pagers](#pagers)
-- [Variables and the environment](#variables-and-the-environment)
-- [The `PATH` variable](#the-path-variable)
-- [Startup scripts](#startup-scripts)
+- [터미널이란?](#what-is-the-terminal)
+- [프롬프트](#the-prompt)
+- [명령 입력하기](#entering-commands)
+- [현재 작업 디렉터리](#the-current-working-directory)
+- [명령 복사·붙여넣기](#copy-pasting-commands)
+- [리디렉션](#redirection)
+- [페이저](#pagers)
+- [변수와 환경](#variables-and-the-environment)
+- [`PATH` 변수](#the-path-variable)
+- [시작 스크립트](#startup-scripts)
 <!--toc:end-->
 
-## What is the terminal?
+## 터미널이란? {#what-is-the-terminal}
 
-The terminal is an application that lets you enter commands to the operating system in the form of text.
-The commands usually produce text themselves, which will be displayed to you.
+터미널은 운영체제에 텍스트 형태의 명령을 입력할 수 있게 해 주는 애플리케이션입니다.
+대부분의 명령은 스스로 텍스트를 출력하며, 그 내용이 화면에 표시됩니다.
 
-The terminal used to be the primary way people interact with a computer.
-That was before the time of graphical user interfaces.
-Today, the terminal works much the same as it did in the past, but it's inside a normal app window now.
-The app can have different names, but "Terminal" and "Console" or variations thereof are most common.
+예전에는 사람들이 컴퓨터와 상호 작용하는 기본 방식이 터미널이었습니다.
+그래픽 사용자 인터페이스가 등장하기 전의 이야기죠.
+지금의 터미널도 과거와 비슷하게 동작하지만, 이제는 일반 앱 창 속에 들어 있습니다.
+앱 이름은 다양하지만 보통 "Terminal"이나 "Console" 같은 단어가 들어갑니다.
 
-## The prompt
+## 프롬프트 {#the-prompt}
 
-When you start the terminal, the initial text you will see is called the **prompt**.
-Whenever a command finishes running, the prompt will be shown again.
-That's your sign that you can start entering your next command.
-Here's an example of what a prompt can look like:
+터미널을 실행하면 처음 보이는 텍스트가 **프롬프트**입니다.
+명령 실행이 끝날 때마다 프롬프트가 다시 나타납니다.
+이제 다음 명령을 입력해도 된다는 표시죠.
+프롬프트 예시는 다음과 같습니다.
 
 ```
 [username@hostname ~]$
 ```
 
-This shows some information that'll be useful later, but don't worry about it for now.
-The prompt usually ends with a dollar **`$`** or percent **`%`** sign, so you can easily recognize it.
-The dollar sign is often used as a short representation of the prompt.
+여기에 표시되는 정보는 나중에 유용하지만, 지금은 신경 쓰지 않아도 됩니다.
+프롬프트는 보통 달러 **`$`** 또는 퍼센트 **`%`** 기호로 끝나므로 쉽게 알아볼 수 있습니다.
+달러 기호가 프롬프트를 짧게 표현한 것이라고 생각하면 됩니다.
 
-## Entering commands
+## 명령 입력하기 {#entering-commands}
 
-Being presented with the prompt is our cue to execute commands, so let's do that.
-Type the following and then press <kbd>Enter</kbd>:
+프롬프트가 보이면 명령을 실행할 차례입니다.
+다음 내용을 입력한 뒤 <kbd>Enter</kbd>를 눌러 보세요.
 
 ```sh
 echo Hello, terminal!
 ```
 
-The terminal will split your commands into words based on whitespace.
-The above command has three words:
+터미널은 공백을 기준으로 명령을 단어 단위로 나눕니다.
+위 명령은 세 단어로 이루어져 있습니다.
 - `echo`
 - `Hello,`
 - `terminal!`
 
-The first word is the program to run.
-The terminal will find a program called `echo` on your computer and run it with the two **arguments** `Hello,` and `terminal!`.
-The program is free to interpret these arguments however it wants.
-The program called `echo` happens to simply print its arguments back to the terminal:
+첫 단어는 실행할 프로그램입니다.
+터미널은 컴퓨터에서 `echo`라는 프로그램을 찾아 `Hello,`, `terminal!` 두 **인자**를 넘겨 실행합니다.
+프로그램은 인자를 원하는 방식으로 해석할 수 있습니다.
+`echo`라는 프로그램은 넘겨받은 인자를 그대로 터미널에 출력합니다.
 
 ```console
 $ echo Hello, terminal!
 Hello, terminal!
 ```
 
-## The current working directory
+## 현재 작업 디렉터리 {#the-current-working-directory}
 
-One deeply fundamental concept of the terminal is the **current working directory**.
-It's a location in your filesystem, the one "where you currently are".
+터미널의 가장 핵심 개념 중 하나가 **현재 작업 디렉터리(CWD)** 입니다.
+파일 시스템에서 "지금 내가 있는 위치"를 의미합니다.
 
-Most commands you run behave differently based on this "current location".
-Because of that, we need to be able to change it.
-The command to do that is called `cd`, short for "change directory".
-You probably have a folder called "Downloads", but you can substitute a different one in this example:
+대부분의 명령은 이 "현재 위치"에 따라 다르게 동작합니다.
+따라서 이 위치를 변경할 수 있어야 합니다.
+디렉터리를 바꾸는 명령이 `cd`(change directory)입니다.
+아마 "Downloads"라는 폴더가 있을 텐데, 다른 폴더를 써도 됩니다.
 
 ```console
 [username@hostname ~]$ cd Downloads
 [username@hostname Downloads]$
 ```
 
-Oh!
-Did you notice that **the prompt changed**?
-The current working directory, or CWD for short, is so important that it's usually shown somewhere in the prompt.
-That way you always know "where you are".
+오!
+**프롬프트가 바뀐 것** 을 눈치챘나요?
+현재 작업 디렉터리는 그만큼 중요해서, 보통 프롬프트 어딘가에 표시됩니다.
+그래야 항상 "내가 어디 있는지" 알 수 있죠.
 
-Before running `cd` in the example above, the CWD was apparently the tilde **`~`** character.
-That's a shorthand for your user's **home directory**.
-On Linux, that's `/home/username`.
-Another way to determine your CWD is to call the command `pwd`, short for "print working directory".
-It expands the shorthand tilde **`~`** character to its full path.
+위 예시에서 `cd`를 실행하기 전 CWD는 물결표 **`~`** 였습니다.
+이는 사용자 **홈 디렉터리** 의 약칭입니다.
+Linux에서는 `/home/username`과 같습니다.
+CWD를 확인하는 또 다른 방법은 `pwd`(print working directory) 명령을 실행하는 것입니다.
+물결표 **`~`** 같은 약칭을 전체 경로로 풀어 줍니다.
 
 ```
 [username@hostname Downloads]$ pwd
@@ -101,98 +101,98 @@ It expands the shorthand tilde **`~`** character to its full path.
 [username@hostname Downloads]$
 ```
 
-One example of a CWD-aware command is `ls`, which lists files and directories.
-Go ahead and run `ls` in your `Downloads` folder.
-Maybe it's time to clean it up a little...?
+CWD에 따라 동작이 달라지는 명령 예시로 `ls`가 있습니다. 파일과 디렉터리를 보여 주죠.
+`Downloads` 폴더에서 `ls`를 실행해 보세요.
+혹시 정리할 때가 된 건 아닐까요...?
 
-The important lesson to take away here is:
-**Be aware of your current working directory**.
-If a command doesn't do what you want, you might just be in the wrong place.
+여기서 기억할 가장 중요한 교훈은 다음과 같습니다.
+**현재 작업 디렉터리를 항상 의식하세요.**
+명령이 원하는 대로 동작하지 않는다면 단지 잘못된 위치에 있을 수도 있습니다.
 
 
-## Copy-pasting commands
+## 명령 복사·붙여넣기 {#copy-pasting-commands}
 
-This tutorial contains many code blocks that contain commands for you to copy-paste into your terminal.
-Multiple commands can be on separate lines and you can copy-paste them all at once without issues.
-If you hover your mouse over the top-right corner of a code block, a hidden copy-button will appear.
-Very useful!
+이 튜토리얼에는 터미널에 복사해 붙여 넣어야 하는 명령이 담긴 코드 블록이 많이 등장합니다.
+여러 줄로 된 명령이라도 한 번에 복사·붙여넣기 해도 괜찮습니다.
+코드 블록 오른쪽 위에 마우스를 올리면 숨겨진 복사 버튼이 나타납니다.
+무척 유용합니다!
 
-For historical reasons, <kbd>Ctrl</kbd>+<kbd>C</kbd> and <kbd>Ctrl</kbd>+<kbd>V</kbd> don't do copy and paste in the terminal.
-Instead, you need to use <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd>/<kbd>V</kbd> respectively.
-If you're using a Mac, <kbd>Command</kbd>+<kbd>C</kbd>/<kbd>V</kbd> works normally.
+역사적인 이유로 터미널에서는 <kbd>Ctrl</kbd>+<kbd>C</kbd>, <kbd>Ctrl</kbd>+<kbd>V</kbd>가 복사·붙여넣기를 의미하지 않습니다.
+대신 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd>/<kbd>V</kbd> 조합을 사용해야 합니다.
+Mac이라면 <kbd>Command</kbd>+<kbd>C</kbd>/<kbd>V</kbd>로 평소처럼 동작합니다.
 
-If you forget about this and type <kbd>Ctrl</kbd>+<kbd>V</kbd> without <kbd>Shift</kbd> in an attempt to paste a command into the terminal, it will actually get messed up a little.
-You can't just try again with <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd>.
-You would end up with something like this:
+이 사실을 잊고 <kbd>Shift</kbd> 없이 <kbd>Ctrl</kbd>+<kbd>V</kbd>를 눌러 명령을 붙여 넣으려 하면, 명령이 엉망이 됩니다.
+이 상태에서 바로 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd>로 다시 붙여넣을 수 없습니다.
+이런식으로 보이게 됩니다.
 
 ```console
 $ ^[[200~echo Hello, terminal!~
 ```
 
-These weird characters are an "escape sequence" caused by typing <kbd>Ctrl</kbd>+<kbd>V</kbd> without <kbd>Shift</kbd>.
-This command will not work.
-So, if you make the mistake of forgetting <kbd>Shift</kbd>, just hit <kbd>Enter</kbd> a couple of times until you get a fresh prompt, then try again.
+이상한 문자는 <kbd>Shift</kbd> 없이 <kbd>Ctrl</kbd>+<kbd>V</kbd>를 눌렀을 때 생기는 "이스케이프 시퀀스"입니다.
+이 명령은 제대로 실행되지 않습니다.
+<kbd>Shift</kbd>를 잊어버렸다면 <kbd>Enter</kbd>를 몇 번 눌러 새 프롬프트를 만든 뒤 다시 시도하세요.
 
-Some of the commands will contain **comments**, which are lines of text following a pound **`#`** character.
-The terminal simply ignores them.
-They are used to make commands more understandable to human readers, but they don't affect the command execution.
+일부 명령에는 **주석** 이 포함됩니다. 샵 **`#`** 문자 뒤의 텍스트가 그것입니다.
+터미널은 주석을 무시합니다.
+사람이 명령을 이해하기 쉽게 돕기 위한 것이며, 실행 결과에는 영향을 주지 않습니다.
 
-You can practice by copy-pasting the following command into your terminal:
+터미널에 아래 명령을 복사해 붙여 넣으며 연습해 보세요.
 
 ```sh
-# Here are some example comments:
+# 다음은 예시 주석입니다:
 #
-# This is the program being run.
+# 이것이 실행할 프로그램입니다.
 # |
-# |  This is the start of the first argument.
+# |  이것이 첫 번째 인자의 시작입니다.
 # |  |
-# |  |      This is the start of the second argument.
+# |  |      이것이 두 번째 인자의 시작입니다.
 # v  v      v
-echo Hello, terminal! # Placing a comment next to a command is also allowed.
+echo Hello, terminal! # 명령 옆에 주석을 적어도 됩니다.
 ```
 
-## Redirection
+## 리디렉션 {#redirection}
 
-We've seen how the `echo` command prints its arguments back to the terminal.
-But that's just the default.
-`echo` just prints to something called "standard out", or "stdout".
-That is usually connected to your terminal.
-But you can also **redirect** the stdout of a program, for example to a file with the `>` operator.
-An example looks like this:
+앞에서 `echo` 명령이 인자를 터미널에 출력한다는 것을 봤습니다.
+하지만 그것은 기본 동작일 뿐입니다.
+`echo`는 "표준 출력", 즉 "stdout"에 출력합니다.
+보통 stdout은 터미널에 연결되어 있습니다.
+하지만 `>` 연산자를 사용하면 프로그램의 stdout을 다른 곳(예: 파일)으로 **리디렉션** 할 수 있습니다.
+예시는 다음과 같습니다.
 
 ```sh
 echo "bread, onions, tea" > groceries.txt
 ```
 
-In this book, I will often tell you to manipulate a file by running a command that looks like the one above.
+이 책에서는 종종 위와 같은 형태로 파일을 다루도록 안내할 것입니다.
 
-The `>` operator _overwrites_ a file, but there is also the `>>` operator, which _appends_ to the end of a file.
+`>` 연산자는 파일을 _덮어쓰고_, `>>` 연산자는 파일 끝에 _추가_ 합니다.
 
-## Pagers
+## 페이저 {#pagers}
 
-Some commands you run in the terminal print a lot of text.
-It can be tedious to scroll all the way back up to the point where the command output started.
-This is where a **pager** can help.
-It takes the output from another program and shows it to you from the beginning.
+터미널에서 실행하는 명령은 때때로 많은 텍스트를 출력합니다.
+명령 결과가 시작된 지점을 찾기 위해 위로 길게 스크롤하는 일은 번거롭습니다.
+이때 **페이저(pager)** 가 도움이 됩니다.
+다른 프로그램의 출력을 받아 처음부터 차근차근 보여 줍니다.
 
-Some programs will display their output in a pager automatically, because they know they will be printing a lot of text.
-Jujutsu also does that sometimes.
-Given that you may "accidentally" end up in a pager, you need to know that you can **exit a pager by typing** <kbd>q</kbd>!
+일부 프로그램은 많은 텍스트를 출력한다는 사실을 알기 때문에 자동으로 페이저에서 결과를 보여 줍니다.
+Jujutsu도 가끔 그렇게 합니다.
+의도치 않게 페이저에 들어갈 수도 있으니, **<kbd>q</kbd>를 눌러 페이저에서 나올 수 있다** 는 사실을 꼭 알아 두세요!
 
-If the output of Jujutsu is displayed in a pager, the bottom left corner will be a colon `:` character and your prompt won't be shown.
-One way you can experiment with using a pager is by running `man tar`, which opens the manual page for the `tar` command.
+Jujutsu 출력이 페이저에서 표시되면 왼쪽 아래 모서리에 콜론 `:`이 보이고, 프롬프트는 사라집니다.
+`man tar` 명령을 실행해 `tar` 명령의 매뉴얼 페이지를 열면 페이저를 직접 사용해 볼 수 있습니다.
 
-Various key bindings let you navigate in the pager.
-The arrow keys, "page up" and "page down" all work as expected.
-Another super useful one is this:
-Typing <kbd>/</kbd> allows you to enter a search term, then <kbd>Enter</kbd> starts the search.
-Step through the search hits with (lowercase) <kbd>n</kbd> and step backwards with (uppercase) <kbd>N</kbd>.
+여러 키 바인딩으로 페이저 안에서 이동할 수 있습니다.
+화살표, Page Up, Page Down 키는 예상대로 동작합니다.
+특히 유용한 기능은 검색입니다.
+<kbd>/</kbd>를 입력하면 검색어를 적을 수 있고, <kbd>Enter</kbd>로 검색을 시작합니다.
+소문자 <kbd>n</kbd>으로 다음 검색 결과, 대문자 <kbd>N</kbd>으로 이전 결과로 이동할 수 있습니다.
 
-## Variables and the environment
+## 변수와 환경 {#variables-and-the-environment}
 
-Running programs on your computer by typing their name is only scratching the surface of what the terminal can do.
-It actually has a whole little programming / scripting language built-in.
-For example, you can store values in variables with the equal **`=`** sign and evaluate them with the dollar **`$`** sign:
+프로그램 이름을 입력해 실행하는 것은 터미널의 극히 일부 기능만 사용하는 것입니다.
+터미널은 사실 간단한 프로그래밍/스크립팅 언어를 내장하고 있습니다.
+예를 들어 등호 **`=`** 로 값을 변수에 저장하고, 달러 **`$`** 로 값을 꺼낼 수 있습니다.
 
 ```console
 $ my_name=Alice
@@ -200,13 +200,12 @@ $ echo Hello, $my_name!
 Hello, Alice!
 ```
 
-Normal variables like above cannot be read by programs you run.
-They are only for your own use in the current terminal session.
-However, variables can be **exported** into the **environment**, which makes them accessible for programs to read.
-This is an alternative way to tell programs what you want them to do.
-The more common way is with arguments on the command line, but exported variables are useful in some situations.
+위처럼 만든 일반 변수는 실행한 프로그램에서 읽을 수 없습니다.
+현재 터미널 세션에서 나만을 위한 값입니다.
+하지만 변수를 **환경** 으로 **내보내면(export)** 프로그램이 읽을 수 있게 됩니다.
+명령줄 인자로 프로그램에 의도를 전달하는 것이 보통이지만, 어떤 상황에서는 내보낸 변수가 편리합니다.
 
-You can export a variable separately from setting its value or do it all in one line:
+변수를 설정한 뒤 따로 export할 수도 있고, 한 줄로 함께 처리할 수도 있습니다.
 
 ```sh
 MY_NAME=Alice
@@ -217,110 +216,108 @@ export MY_NAME
 export MY_NAME=Alice
 ```
 
-Such exported variables are usually referred to as **environment variables**.
-They are not _required_ to be uppercase, but it's a strong convention.
-It makes it easy to know which variables can be read by other programs.
+이렇게 내보낸 변수를 흔히 **환경 변수** 라고 부릅니다.
+대문자여야 하는 것은 아니지만 강한 관례입니다.
+그래야 어떤 변수가 다른 프로그램에서 읽힐 수 있는지 쉽게 알 수 있습니다.
 
-## The `PATH` variable
+## `PATH` 변수 {#the-path-variable}
 
-One environment variable that can be difficult to understand at first is the `PATH` variable.
-First, let's print it to see what it contains:
+처음에는 이해하기 어려울 수 있는 환경 변수로 `PATH`가 있습니다.
+먼저 어떤 내용인지 출력해 보겠습니다.
 
 ```console
 $ echo $PATH
 /home/username/.local/bin:/usr/local/bin:/usr/bin
 ```
 
-Your output may well look different, but the structure is the same:
-It's a list of filesystem paths separated by the colon **`:`** character.
-In this case, there are three paths:
+여러분의 출력은 다를 수 있지만 구조는 같습니다.
+콜론 **`:`** 으로 구분된 파일 경로 목록입니다.
+위 예시에서는 세 경로가 있습니다.
 - `/home/username/.local/bin`
 - `/usr/local/bin`
 - `/usr/bin`
 
-What do these three paths mean?
-They are the places where your terminal searches for programs to run!
-Let's mess with it to see what happens.
-Set the `PATH` variable to the empty string:
+이 경로들은 무엇을 의미할까요?
+터미널이 프로그램을 찾기 위해 탐색하는 위치입니다!
+직접 확인해 보기 위해 `PATH` 변수를 빈 문자열로 설정해 봅시다.
 
 ```sh
 export PATH=""
 ```
 
-Now try to run a program, like `ls` for example:
+이제 `ls` 같은 프로그램을 실행해 보세요.
 
 ```console
 $ ls
 bash: ls: No such file or directory
 ```
 
-Oops.
-Setting the `PATH` variable to the empty string tells the terminal to _not search for programs anywhere_.
-Therefore, the programs `ls` cannot be found anymore.
+앗차.
+`PATH`를 빈 문자열로 설정하면 _어디에서도 프로그램을 찾지 말라_ 는 의미입니다.
+따라서 `ls` 같은 프로그램을 더 이상 찾을 수 없습니다.
 
-We could fix this by copy-pasting the previous value of `PATH` and export that again.
-But if you mess up the value of an environment variable for real, you often don't know what the previous, correct value was.
-So it's easiest to just close the terminal window and open a new one.
-All variables will be reset to their default.
+이 문제를 해결하려면 이전 `PATH` 값을 복사해 다시 export하면 됩니다.
+하지만 실제로 환경 변수 값을 망가뜨렸을 때는 원래 올바른 값을 모르는 경우가 많습니다.
+그래서 가장 쉬운 해결책은 터미널 창을 닫고 새로 여는 것입니다.
+모든 변수가 기본값으로 초기화됩니다.
 
-So, if modifying the `PATH` variable can break your session, should you just never touch it?
-Not quite.
-Sometimes you want (or need) to install programs in a different location than where your terminal searches for them by default.
-In that case, you need to _extend_ the list of paths stored in the `PATH` variable.
-Here's an example:
+그러면 `PATH`를 수정하면 세션이 망가질 수 있는데, 아예 건드리지 말아야 할까요?
+꼭 그렇지는 않습니다.
+가끔은 터미널이 기본적으로 검색하지 않는 위치에 프로그램을 설치해야 할 때가 있습니다.
+그럴 땐 `PATH` 변수에 저장된 경로 목록을 _확장_ 해야 합니다.
+예시는 다음과 같습니다.
 
 ```sh
 export PATH="/home/username/my-local-programs:$PATH"
 ```
 
-This starts with a new path at the front of the list, then there's the colon **`:`** separator and lastly the rest of the list, which is the previous value stored in `PATH`.
+새 경로를 목록의 앞쪽에 두고, 콜론 **`:`** 구분자를 추가한 뒤 나머지를 이어 붙였습니다.
+뒤쪽에 있는 값이 바로 이전 `PATH` 값입니다.
 
-## Startup scripts
+## 시작 스크립트 {#startup-scripts}
 
-The above command to edit the `PATH` variable will only affect the current terminal session.
-So, if you close the terminal and reopen a new window, the value of `PATH` will be reset to its default.
-But that may not be desirable.
-If you install programs into a custom location, you may want all your future terminal sessions to find those programs automatically.
+위에서 본 `PATH` 수정 명령은 현재 터미널 세션에만 영향을 줍니다.
+터미널을 닫고 새 창을 열면 `PATH` 값은 기본값으로 되돌아갑니다.
+하지만 언제나 그럴 필요는 없습니다.
+프로그램을 사용자 지정 위치에 설치했다면, 앞으로 열리는 모든 터미널 세션이 해당 프로그램을 자동으로 찾았으면 좋겠죠.
 
-That's where startup scripts come into play.
-They are files containing a list of commands (also known as **scripts**).
-_Startup_ scripts are automatically executed whenever you open a new terminal, before you can even type the first command.
-So that's the perfect place to make permanent changes to all your future terminal sessions!
+이때 **시작 스크립트(startup script)** 를 사용합니다.
+명령 목록(즉, **스크립트**)이 들어 있는 파일입니다.
+_시작_ 스크립트는 터미널을 열 때마다 자동으로 실행되어, 여러분이 첫 명령을 입력하기 전에 이미 적용됩니다.
+앞으로 열릴 모든 터미널 세션에 영구적인 변경을 적용하기에 완벽한 위치입니다!
 
-The location and name of your startup script depend on your **shell**, i.e. your specific "flavor" of terminal.
-The terminal is pretty standardized, so we mostly don't need to worry about different shells.
-This is an exception.
-If you're using Linux, your shell is probably called `bash`.
-If you're using Mac, your shell is probably called `zsh`.
-To find out for sure, you can read the `SHELL` environment variable:
+시작 스크립트의 위치와 이름은 사용하는 **셸(shell)**, 즉 터미널의 종류에 따라 다릅니다.
+터미널은 상당히 표준화되어 있어 보통은 셸마다 차이를 신경 쓰지 않아도 되는데, 이 부분이 예외입니다.
+Linux에서는 보통 `bash`, Mac에서는 `zsh`를 사용합니다.
+정확히 알고 싶다면 `SHELL` 환경 변수를 확인하세요.
 
 ```console
 $ echo $SHELL
 /bin/bash
 ```
 
-If your shell is `bash`, you should add your custom startup commands to the file **`~/.bashrc`**.
-In the case of `zsh`, the startup script is **`~/.zshrc`**.
+셸이 `bash`라면 **`~/.bashrc`** 파일에 사용자 정의 시작 명령을 추가하면 됩니다.
+`zsh`라면 **`~/.zshrc`**가 시작 스크립트입니다.
 
-For now, print the content of your startup script.
-It's probably complicated, so don't try to understand it all.
-Nevertheless, taking a look is a great way to get acquainted with the terminal:
+우선 시작 스크립트의 내용을 출력해 보세요.
+복잡해 보일 수 있지만 이해하려 애쓰지 않아도 됩니다.
+한 번 들여다보는 것만으로도 터미널과 친해지는 좋은 방법입니다.
 
 ```sh
-# for bash
+# bash 사용 시
 cat ~/.bashrc
 ```
 
 ```sh
-# for zsh
+# zsh 사용 시
 cat ~/.zshrc
 ```
 
-```admonish success title="Now you know the basics of the terminal ! 🎉"
-If most of this stuff was news to you, pat yourself on the back!
-You've already learned a lot.
-This should be enough knowledge about the terminal to get you through the tutorial.
+```admonish success title="이제 터미널 기초 완성! 🎉"
+여기 나온 내용이 대부분 처음 듣는 이야기였다면 스스로를 칭찬하세요!
+벌써 많은 것을 배웠습니다.
+튜토리얼을 따라가기에 충분한 터미널 지식을 갖춘 셈입니다.
 
-Don't hesitate to come back here and revise from time to time.
-The rules of the terminal are not the most intuitive, so it can take a couple attempts for them to settle in.
+생각나면 가끔 이 장으로 돌아와 복습하세요.
+터미널 규칙은 직관적이지 않아서 익숙해지려면 여러 번 반복해야 할 수도 있습니다.
 ```
